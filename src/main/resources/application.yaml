@@ -1,0 +1,48 @@
+google:
+  auth-server-url: ${GOOGLE_AUTH_URL:}
+  client-secret: ${GOOGLE_CLIENT_SECRET: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}
+  client-id: ${GOOGLE_CLIENT_ID:1034795158974-hcdgmlpltgebldbqrvs83npum8qsc0dt.apps.googleusercontent.com}
+spring:
+  datasource:
+    password: ${SPRING.DATASOURCE.PASSWORD:123456}
+    driver-class-name: org.postgresql.Driver
+    username: ${SPRING.DATASOURCE.USERNAME:postgres}
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/OnLearn}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: ${SPRING.JPA.SHOW-SQL:true}
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: onlearnservice@gmail.com
+    password: fvbo acpo umam fada
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+aws:
+  secret-key: ${AWS_SECRET_KEY:xkf+8z0qfkjW4Kt50ci0T1mnC/x8X2ftLFOzNLAF}
+  region: ${AWS_BUCKET_REGION:ap-southeast-1}
+  access-key: ${AWS_ACCESS_KEY:AKIAUDA34SKAOAIUJAWL}
+  bucket: ${AWS_BUCKET_NAME:swp-event}
+server:
+  url: https://api.fptsp.xyz/onlearn
+  path: ${SERVER_PATH:https://api.fptsp.xyz/onlearn}
+  #path: ${SERVER_PATH:http://localhost:8080}
+  paypalCaptureUrl: ${FE_PATH:http://localhost:3000/paypal/capture}
+  #paypalCaptureUrl: ${FE_PATH:https://onlearn.fpt-ec.click/}
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+    enabled: ${SPRING_DOC_ENABLED:true}
+    groups:
+      enabled: true
+  swagger-ui:
+    enabled: ${SWAGGER_UI_ENABLED:true}
+    operations-sorter: alpha
+    tags-sorter: alpha
+    config-url: ${server.path}/v3/api-docs/swagger-config
+    url: ${server.path}/v3/api-docs

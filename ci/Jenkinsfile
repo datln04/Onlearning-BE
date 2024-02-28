@@ -1,0 +1,30 @@
+#!groovy
+
+pipeline {
+    agent {
+        kubernetes {
+            yamlFile "ci/pod_builder.yaml"
+            retries 0
+        }
+    }
+    environment {
+        ECR_REGISTRY="docker.io/distrolessman"
+        IMAGE_NAME="onlearn"
+        TAG="latest"
+    }
+    stages {
+        stage('Build') {
+            steps {
+                container("builder") {
+                    sh "mvn clean package -Dmaven.test.skip"
+                    sh "cd target && java -Djarmode=layertools -jar onlearn-*.jar extract"
+                }
+                container("pusher") {
+                    sh """#!/busybox/sh
+                    /kaniko/executor --context `pwd` --dockerfile `pwd`/Dockerfile --destination "${ECR_REGISTRY}/${IMAGE_NAME}:${TAG}" --use-new-run=true
+                    """
+                }
+            }
+        }
+    }
+}

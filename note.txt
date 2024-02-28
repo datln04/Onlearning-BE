@@ -1,0 +1,40 @@
+
+===========================================delete account==================================================
+delete from profile;
+delete from account;
+delete from teacher;
+delete from system_config;
+delete from staff;
+delete from student;
+delete from wallet;
+delete from device;
+
+
+
+===========================================delete data==================================================
+delete from answer;
+delete from question;
+delete from result_detail;
+delete from result_quiz;
+delete from used_answer;
+delete from used_question;
+delete from quiz;
+delete from feed_content;
+delete from feedback_detail;
+delete from feedback;
+delete from transaction;
+delete from syllabus_lessons;
+delete from resource;
+delete from lesson;
+delete from enroll;
+delete from syllabus;
+delete from reject_course;
+delete from course;
+delete from notification;
+delete from payment_history;
+delete from payment_methods;
+delete from report;
+delete from subject;
+delete from withdrawal_request_transactions;
+delete from withdrawal_request;
+

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Insert title here</title>
+
+    <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-messaging.js"></script>
+    <script src="https://unpkg.com/vue@3.2.26/dist/vue.global.js"></script>
+    <script type="text/javascript">
+
+
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/firebase-messaging-sw.js')
+                .then(function (registration) {
+                    console.log('Registration successful, scope is:', registration.scope);
+                }).catch(function (err) {
+                console.log('Service worker registration failed, error:', err);
+            });
+        }
+
+        const firebaseConfig = {
+            // Your Firebase project configuration goes here
+            apiKey: "AIzaSyBdNnOg_OjNkKsxd3QEAvqDjvgeYWtQUIg",
+            authDomain: "fir-fcm-8d942.firebaseapp.com",
+            projectId: "fir-fcm-8d942",
+            storageBucket: "fir-fcm-8d942.appspot.com",
+            messagingSenderId: "884651803428",
+            appId: "1:884651803428:web:0c00ae7605494184ffe9b1",
+            measurementId: "G-FJQ0176Y0M",
+        };
+        firebase.initializeApp(firebaseConfig);
+
+        const messaging = firebase.messaging();
+
+        messaging.onMessage((payload) => {
+            console.log('Message received. ', payload);
+
+            const title = payload.notification.title;
+            const options = {
+                body: payload.notification.body,
+                icon: payload.notification.icon
+            };
+
+            if (Notification.permission === 'granted') {
+                // If the user has granted permission to display notifications, create a new notification
+                new Notification(title, options);
+            } else {
+                // If the user has not granted permission, ask for permission and then create a new notification
+                Notification.requestPermission().then(permission => {
+                    if (permission === 'granted') {
+                        new Notification(title, options);
+                    }
+                });
+            }
+        });
+    </script>
+</head>
+
+<body>
+<h1>Response</h1>
+
+
+</body>
+
+</html>
